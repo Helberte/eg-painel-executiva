@@ -1,0 +1,17 @@
+C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\eg-painel.exe
+C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\eg-painel.deps.json
+C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\eg-painel.runtimeconfig.json
+C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\eg-painel.dll
+C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\eg-painel.pdb
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.csproj.AssemblyReference.cache
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.Form1.resources
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.csproj.GenerateResource.cache
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.GeneratedMSBuildEditorConfig.editorconfig
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.AssemblyInfoInputs.cache
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.AssemblyInfo.cs
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.csproj.CoreCompileInputs.cache
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.dll
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\refint\eg-painel.dll
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.pdb
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.genruntimeconfig.cache
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\ref\eg-painel.dll

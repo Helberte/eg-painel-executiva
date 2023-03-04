@@ -19,3 +19,5 @@ C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\FontAwesome.Sharp.dll
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.csproj.CopyComplete
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.form_login.Form_login_inicial.resources
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.Properties.Resources.resources
+C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\Npgsql.dll

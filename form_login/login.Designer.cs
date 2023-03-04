@@ -96,6 +96,7 @@
             this.pictureBox_bt_acessar.TabIndex = 4;
             this.pictureBox_bt_acessar.Text = "ACESSAR";
             this.pictureBox_bt_acessar.UseVisualStyleBackColor = false;
+            this.pictureBox_bt_acessar.Click += new System.EventHandler(this.pictureBox_bt_acessar_Click);
             // 
             // ed_senha
             // 
@@ -105,6 +106,9 @@
             this.ed_senha.Name = "ed_senha";
             this.ed_senha.Size = new System.Drawing.Size(301, 27);
             this.ed_senha.TabIndex = 3;
+            this.ed_senha.Enter += new System.EventHandler(this.ed_senha_Enter);
+            this.ed_senha.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ed_senha_KeyPress);
+            this.ed_senha.Leave += new System.EventHandler(this.ed_senha_Leave);
             // 
             // ed_usuario
             // 

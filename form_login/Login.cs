@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using eg_painel.classes.system_settings;
+using eg_painel.form_login;
 
 namespace eg_painel.form_login
 {
@@ -155,6 +156,47 @@ namespace eg_painel.form_login
                 ed_usuario.Text = texto_padrao_ed_usuario;
                 ed_usuario.ForeColor = Color.FromArgb(160, 156, 153);
             }
+        }
+
+        private void ed_senha_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+                if (e.KeyChar != (char)Keys.Back)
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void ed_senha_Enter(object sender, EventArgs e)
+        {
+            if (ed_senha.Text == texto_padrao_ed_senha)
+            {
+                ed_senha.Clear();
+                ed_senha.PasswordChar = '*';
+                ed_senha.ForeColor = Color.Black;
+            }
+        }
+
+        private void ed_senha_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(ed_senha.Text))
+            {
+                ed_senha.ForeColor = Color.FromArgb(160, 156, 153);
+                ed_senha.PasswordChar = '\u0000';
+                ed_senha.Text = texto_padrao_ed_senha;
+            }
+        }
+
+        private async void pictureBox_bt_acessar_Click(object sender, EventArgs e)
+        {
+            Manage_login login = new Manage_login(ed_usuario.Text, ed_senha.Text);
+            int teste = await login.ValidateUser();
+
+            if (teste == 1)            
+                this.Close();            
+
         }
     }
 }

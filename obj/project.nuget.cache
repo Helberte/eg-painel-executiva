@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "eiRn9lyuIGoWQ4n8r+PTfflp7sraL0OljjmZ2QMLtaGvFH2c57/rWJJAVm9tftw5vwoAPXtSQj7E6yr68nel5A==",
+  "dgSpecHash": "Sg3N66RCcA8F4ITiSWrG0PhD9jHKEgGhswUXNPIjL9CFWayi0VI3ZQD47l4j+4JOvleqyTlNoTH/muq2jROWAg==",
   "success": true,
   "projectFilePath": "C:\\PROJETOS - C#\\eg-painel\\eg-painel.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\helbe\\.nuget\\packages\\fontawesome.sharp\\6.2.1\\fontawesome.sharp.6.2.1.nupkg.sha512"
+    "C:\\Users\\helbe\\.nuget\\packages\\fontawesome.sharp\\6.2.1\\fontawesome.sharp.6.2.1.nupkg.sha512",
+    "C:\\Users\\helbe\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\helbe\\.nuget\\packages\\npgsql\\7.0.2\\npgsql.7.0.2.nupkg.sha512"
   ],
   "logs": []
 }

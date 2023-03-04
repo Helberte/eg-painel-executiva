@@ -43,6 +43,10 @@
             "FontAwesome.Sharp": {
               "target": "Package",
               "version": "[6.2.1, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[7.0.2, )"
             }
           },
           "imports": [

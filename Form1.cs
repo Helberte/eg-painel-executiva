@@ -1,3 +1,5 @@
+using eg_painel.form_login;
+
 
 namespace eg_painel
 {
@@ -8,5 +10,10 @@ namespace eg_painel
             InitializeComponent();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form_login_inicial login = new Form_login_inicial();
+            login.ShowDialog();
+        }
     }
 }

@@ -11,31 +11,46 @@ namespace eg_painel.classes.connection_bd
 {
     internal class Connection
     {
-        static string strConnection = "";
-        Connection_file? connection_file;
-           
+        private static string strConnection = "";
+        public static NpgsqlDataSource? dataSource;
 
-        private Connection()
+        private Connection() {  }
+                     
+        private static void ReadFileConnection()
         {
-            connection_file = new();
+            Connection_file connection_file = new();
 
             if (connection_file.LerArquivo())
             {
-                Connection.strConnection = String.Format(
+                strConnection = String.Format(
                    "Server={0};Username={1};Database={2};Port={3};Password={4};",
                    connection_file.Ip,
                    connection_file.Usuario,
                    "painelvotacao",
                    "5432",
                    connection_file.Senha);
-            }    
+            }
         }
 
-        public static string GetStringConnetion()
+        public static bool SetDataSource()
         {
-            Connection connection = new();
-            return strConnection;
-        }
+            bool ret = false;
 
+            try
+            {
+                if (Connection.dataSource is null)
+                {
+                    ReadFileConnection();
+                    Connection.dataSource = NpgsqlDataSource.Create(Connection.strConnection);                    
+                }
+                ret = true;
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show("Erro na conexão com o banco. " + e.Message.ToString());
+                ret = false;
+            }                    
+            return ret;
+        }
     }
 }

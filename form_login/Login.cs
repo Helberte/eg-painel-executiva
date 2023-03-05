@@ -191,12 +191,15 @@ namespace eg_painel.form_login
 
         private async void pictureBox_bt_acessar_Click(object sender, EventArgs e)
         {
+            panel_center.Cursor = Cursors.AppStarting;
+
             Manage_login login = new Manage_login(ed_usuario.Text, ed_senha.Text);
-            int teste = await login.ValidateUser();
+            int validate = await login.ValidateUser();
 
-            if (teste == 1)            
-                this.Close();            
+            panel_center.Cursor = Cursors.Default;
 
+            if (validate == 1)            
+                this.Close();           
         }
     }
 }

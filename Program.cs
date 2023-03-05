@@ -47,8 +47,6 @@ namespace eg_painel
                     MessageBox.Show("Problemas na inicialização: IP: " + file.Ip + "\n" + e.ToString(), "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-            
         }
     }
 }

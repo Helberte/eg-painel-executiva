@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eg_painel.classes.connection_bd;
+using Microsoft.VisualBasic.Logging;
 using Npgsql;
 
 namespace eg_painel.form_login
@@ -13,7 +14,6 @@ namespace eg_painel.form_login
         private string usuario_login = "";
         private string senha = "";
 
-
         public static int Status = 0;
         public static int ID_Usuario = 0;
         public static string Nome_Usuario = "";
@@ -22,7 +22,6 @@ namespace eg_painel.form_login
         {
             this.usuario_login = usuario_login;
             this.senha = senha;
-            //this.connection = new Connection();
         }
 
         public async Task<int> ValidateUser()
@@ -47,26 +46,29 @@ namespace eg_painel.form_login
             {
                 try
                 {
-                    await using NpgsqlDataSource dataSource = NpgsqlDataSource.Create(Connection.GetStringConnetion());
-                    await using var command = dataSource.CreateCommand("select u.id, u.login from usuarios u where login = 'roberto' and senha = '1'");
-                    await using var reader = await command.ExecuteReaderAsync();
-
-                    while (await reader.ReadAsync())
+                    if (Connection.SetDataSource())
                     {
-                        Manage_login.Status = 1;
-                        MessageBox.Show(reader["id"].ToString(), reader["login"].ToString());
-                        retorno = 1;
+                        if (Connection.dataSource is not null)
+                        {
+                            await using var command = Connection.dataSource.CreateCommand("select u.id, u.login from usuarios u where login = 'roberto' and senha = '1'");
+                            await using var reader = await command.ExecuteReaderAsync();
+                           
+                            while (await reader.ReadAsync())
+                            {
+                                Manage_login.Status = 1;
+                                MessageBox.Show(reader["id"].ToString(), reader["login"].ToString());
+                                retorno = 1;
+                            }
+                        }                        
                     }
-
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.Message.ToString());
                     retorno = 0;
                 }
-            }
+            }            
 
-            
             return retorno;
         }
     }

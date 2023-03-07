@@ -118,6 +118,8 @@ namespace eg_painel.form_login
 
         private void ed_usuario_KeyPress(object sender, KeyPressEventArgs e)
         {
+            ed_usuario.ForeColor = Color.Black;
+
             if (e.KeyChar == Convert.ToChar("'"))
             {
                 e.Handled = true;
@@ -158,16 +160,16 @@ namespace eg_painel.form_login
             }
         }
 
-        private void ed_senha_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar))
-            {
-                if (e.KeyChar != (char)Keys.Back)
-                {
-                    e.Handled = true;
-                }
-            }
-        }
+        //private void ed_senha_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    if (!char.IsDigit(e.KeyChar))
+        //    {
+        //        if (e.KeyChar != (char)Keys.Back)
+        //        {
+        //            e.Handled = true;
+        //        }
+        //    }
+        //}
 
         private void ed_senha_Enter(object sender, EventArgs e)
         {
@@ -191,15 +193,54 @@ namespace eg_painel.form_login
 
         private async void pictureBox_bt_acessar_Click(object sender, EventArgs e)
         {
-            panel_center.Cursor = Cursors.AppStarting;
+            List<string> campos_empty = new List<string>();
 
-            Manage_login login = new Manage_login(ed_usuario.Text, ed_senha.Text);
-            int validate = await login.ValidateUser();
+            foreach (Control item in panel_center.Controls)
+            {
+                if (item is TextBox)
+                {
+                    item.Text = item.Text.Replace(texto_padrao_ed_usuario, "");
+                    item.Text = item.Text.Replace(texto_padrao_ed_senha, "");
 
-            panel_center.Cursor = Cursors.Default;
+                    if (String.IsNullOrEmpty(item.Text.ToString()))                                         
+                        campos_empty.Add(Convert.ToString(item.Tag));    
+                }
+            }
+            if (campos_empty.Count > 0)
+            {
+                string fields = "";
 
-            if (validate == 1)            
-                this.Close();           
+                foreach (var item in campos_empty)
+                {
+                    fields += item + ", ";
+                }
+
+                if (campos_empty.Count == 1)                
+                    MessageBox.Show("O campo [" + fields.Remove(fields.Length - 2) + "] não pode ficar vazio.", "Existe um campo vazio!", MessageBoxButtons.OK, MessageBoxIcon.Information);                
+                else                    
+                    MessageBox.Show("Os campos [" + fields.Remove(fields.Length - 2) + "] não podem ficar vazios.", "Existem campos vazios!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+                ed_usuario.Focus();
+                ed_senha.Text = texto_padrao_ed_senha;
+                ed_senha.ForeColor = Color.FromArgb(160, 156, 153);
+            }
+            else
+            {
+                panel_center.Cursor = Cursors.AppStarting;
+
+                Manage_login login = new Manage_login(ed_usuario.Text, ed_senha.Text);
+                int validate = await login.ValidateUser();
+
+                panel_center.Cursor = Cursors.Default;
+
+                if (validate == 1)
+                    this.Close();
+            }                  
+        }
+
+        private void ed_senha_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ed_senha.ForeColor = Color.Black;
         }
     }
 }

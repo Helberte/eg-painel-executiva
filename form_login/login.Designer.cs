@@ -102,10 +102,11 @@
             // 
             this.ed_senha.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ed_senha.Location = new System.Drawing.Point(59, 224);
-            this.ed_senha.MaxLength = 15;
+            this.ed_senha.MaxLength = 100;
             this.ed_senha.Name = "ed_senha";
             this.ed_senha.Size = new System.Drawing.Size(301, 27);
             this.ed_senha.TabIndex = 3;
+            this.ed_senha.Tag = "Senha";
             this.ed_senha.Enter += new System.EventHandler(this.ed_senha_Enter);
             this.ed_senha.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ed_senha_KeyPress);
             this.ed_senha.Leave += new System.EventHandler(this.ed_senha_Leave);
@@ -118,6 +119,7 @@
             this.ed_usuario.Name = "ed_usuario";
             this.ed_usuario.Size = new System.Drawing.Size(301, 27);
             this.ed_usuario.TabIndex = 2;
+            this.ed_usuario.Tag = "Usuário";
             this.ed_usuario.Enter += new System.EventHandler(this.ed_usuario_Enter);
             this.ed_usuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ed_usuario_KeyPress);
             this.ed_usuario.Leave += new System.EventHandler(this.ed_usuario_Leave);

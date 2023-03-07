@@ -120,6 +120,7 @@
             this.ed_usuario.Size = new System.Drawing.Size(301, 27);
             this.ed_usuario.TabIndex = 2;
             this.ed_usuario.Tag = "Usuário";
+            this.ed_usuario.TextChanged += new System.EventHandler(this.ed_usuario_TextChanged);
             this.ed_usuario.Enter += new System.EventHandler(this.ed_usuario_Enter);
             this.ed_usuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ed_usuario_KeyPress);
             this.ed_usuario.Leave += new System.EventHandler(this.ed_usuario_Leave);

@@ -1,4 +1,5 @@
 using eg_painel.form_login;
+using eg_painel.forms;
 
 
 namespace eg_painel
@@ -14,6 +15,12 @@ namespace eg_painel
         {
             Form_login_inicial login = new Form_login_inicial();
             login.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Entidade entidade = new Entidade();
+            entidade.ShowDialog();
         }
     }
 }

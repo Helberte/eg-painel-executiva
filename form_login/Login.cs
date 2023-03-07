@@ -19,6 +19,11 @@ namespace eg_painel.form_login
         readonly string texto_padrao_ed_senha = "Senha";
         FontFamily? montserrat;
 
+        string[] caracterInvalid = new string[] { "'", "!",  "#", "$", "%", 
+            "&", "*", "(", ")", "-", "\\", "\n", ";", ",", "´", "`", "/", 
+            "+", "=", "ç","^","~","]","[", "{", "}","?", "|","\"",":","°","º", "<",">","ª","§","æ","Æ"," ","¨" };
+
+        
         public Form_login_inicial()
         {
             this.Opacity = 0;
@@ -120,11 +125,16 @@ namespace eg_painel.form_login
         {
             ed_usuario.ForeColor = Color.Black;
 
-            if (e.KeyChar == Convert.ToChar("'"))
+            foreach (var item in caracterInvalid)
             {
-                e.Handled = true;
+                if (e.KeyChar == Convert.ToChar(item))
+                {
+                    e.Handled = true;
+                    break;
+                }
             }
-            else if (e.KeyChar == (char)Keys.Enter)
+            
+            if (e.KeyChar == (char)Keys.Enter)
             {
                 e.Handled = true;
                 ed_senha.Focus();
@@ -133,13 +143,7 @@ namespace eg_painel.form_login
             if (string.IsNullOrWhiteSpace(Convert.ToString(e.KeyChar)))
             {
                 e.Handled = true;
-            }
-            else
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                e.Handled = true;
-                ed_usuario.Focus();
-            }
+            }           
         }
 
         private void ed_usuario_Enter(object sender, EventArgs e)
@@ -194,7 +198,7 @@ namespace eg_painel.form_login
         private async void pictureBox_bt_acessar_Click(object sender, EventArgs e)
         {
             List<string> campos_empty = new List<string>();
-
+         
             foreach (Control item in panel_center.Controls)
             {
                 if (item is TextBox)
@@ -238,9 +242,21 @@ namespace eg_painel.form_login
             }                  
         }
 
+        
         private void ed_senha_KeyPress(object sender, KeyPressEventArgs e)
         {
             ed_senha.ForeColor = Color.Black;
+        }
+
+        private void ed_usuario_TextChanged(object sender, EventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                foreach (var item in caracterInvalid)
+                {
+                    textBox.Text = textBox.Text.Replace(item, "");
+                }
+            }
         }
     }
 }

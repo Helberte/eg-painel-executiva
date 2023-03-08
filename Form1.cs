@@ -19,8 +19,27 @@ namespace eg_painel
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Entidade entidade = new Entidade();
-            entidade.ShowDialog();
+            using (Entidade entidade = new Entidade())
+            {
+                entidade.ShowDialog();
+            }
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            using (CadastroPessoas cadPessoas = new())
+            {
+                cadPessoas.ShowDialog();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            using (Legislaturas legislaturas = new())
+            {
+                legislaturas.ShowDialog();
+            }
         }
     }
 }

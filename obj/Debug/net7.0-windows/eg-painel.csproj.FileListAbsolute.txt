@@ -22,3 +22,5 @@ C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.Properties.Resourc
 C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
 C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\Npgsql.dll
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.forms.Entidade.resources
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.forms.CadastroPessoas.resources
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.forms.Legislaturas.resources

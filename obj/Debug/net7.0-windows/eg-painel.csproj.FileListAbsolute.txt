@@ -4,7 +4,6 @@ C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\eg-painel.runtimeconfig.json
 C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\eg-painel.dll
 C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\eg-painel.pdb
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.csproj.AssemblyReference.cache
-C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.Form1.resources
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.csproj.GenerateResource.cache
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.GeneratedMSBuildEditorConfig.editorconfig
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg-painel.AssemblyInfoInputs.cache
@@ -24,3 +23,4 @@ C:\PROJETOS - C#\eg-painel\bin\Debug\net7.0-windows\Npgsql.dll
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.forms.Entidade.resources
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.forms.CadastroPessoas.resources
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.forms.Legislaturas.resources
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.Form_principal.resources

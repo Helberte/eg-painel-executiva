@@ -8,6 +8,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media;
+using eg_painel.classes;
+using eg_painel.classes.system_settings;
+using FontAwesome.Sharp;
 
 namespace eg_painel.forms
 {
@@ -24,9 +28,42 @@ namespace eg_painel.forms
             this.WindowState = FormWindowState.Normal;
         }
 
-        private void CadastroPessoas_Load(object sender, EventArgs e)
+        private async void CadastroPessoas_Load(object sender, EventArgs e)
         {
+            ClassCadastroPessoa cad = new();
 
+            List<string[]>? array_rows = new List<string[]>();
+
+            dataGridView1.ColumnCount = 4;           
+            dataGridView1.Columns[0].Name = "CPF";
+            dataGridView1.Columns[1].Name = "NOME";
+            dataGridView1.Columns[2].Name = "APELIDO";
+            dataGridView1.Columns[3].Name = "DATA NASCIMENTO";
+            dataGridView1.Columns.Add(new DataGridViewCheckBoxColumn() { Name = "DEFICIENTE VISUAL", Visible = true });
+            dataGridView1.Columns[4].ReadOnly= true;
+            array_rows = await cad.GetPessoas();
+
+            if (array_rows is not null)
+            {
+                foreach (var item in array_rows)
+                {
+                    dataGridView1.Rows.Add(item[0], item[1], item[2], item[3], item[4] == "1" ? true : false);
+                }
+            }
+
+            Settings.AddColumnPlay(dataGridView1);
+            Settings.StylesDataGridView(dataGridView1);
+            Ajusta_largura_colunas_usuarios(dataGridView1);
+        }        
+
+        void Ajusta_largura_colunas_usuarios(DataGridView dataGrid)
+        {
+            // largura das colunas
+            dataGrid.Columns["CPF"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGrid.Columns["NOME"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGrid.Columns["APELIDO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGrid.Columns["DATA NASCIMENTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGrid.Columns["DEFICIENTE VISUAL"].Width = 100;
         }
 
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]

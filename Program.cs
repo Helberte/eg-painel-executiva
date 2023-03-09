@@ -33,7 +33,7 @@ namespace eg_painel
 
                         if (Manage_login.Status == 1)
                         {
-                            Application.Run(new Form1());
+                            Application.Run(new Form_principal());
                         }                        
                     }
                     else

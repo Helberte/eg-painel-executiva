@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eg_painel.classes.system_settings;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +8,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
+using eg_painel.classes;
 
 namespace eg_painel.forms
 {
@@ -42,6 +45,41 @@ namespace eg_painel.forms
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private async void Legislaturas_Load(object sender, EventArgs e)
+        {
+            ClassLegislaturas legislaturas = new ClassLegislaturas();
+
+            List<string[]>? array_rows = new List<string[]>();
+
+            dataGridView1.ColumnCount = 4;
+            dataGridView1.Columns[0].Name = "DATA INICIAL";
+            dataGridView1.Columns[1].Name = "DATA FINAL";
+            dataGridView1.Columns[2].Name = "NÚMERO DE CADEIRAS";
+            dataGridView1.Columns[3].Name = "QUORUM ABERTURA";
+
+            array_rows = await legislaturas.GetLegislaturas();
+
+            if (array_rows is not null)
+            {
+                foreach (var item in array_rows)
+                {
+                    dataGridView1.Rows.Add(item);
+                }
+            }
+
+            Settings.AddColumnPlay(dataGridView1);
+            Settings.StylesDataGridView(dataGridView1);
+            Ajusta_largura_colunas_usuarios(dataGridView1);
+        }
+
+        void Ajusta_largura_colunas_usuarios(DataGridView dataGridView)
+        {
+            dataGridView.Columns["DATA INICIAL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView.Columns["DATA FINAL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView.Columns["NÚMERO DE CADEIRAS"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView.Columns["QUORUM ABERTURA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
     }
 }

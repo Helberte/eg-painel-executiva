@@ -590,8 +590,10 @@ namespace eg_painel
 
                 if (tagItem.ToString() == "acessos")
                 {
-                    //form_acessos form_Acessos = new form_acessos();
-                    //form_Acessos.ShowDialog();
+                    using (FormAccess access = new FormAccess())
+                    {
+                        access.ShowDialog();
+                    }
                 }
                 else if (tagItem.ToString() == "entidade")
                 {

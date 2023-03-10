@@ -13,6 +13,9 @@
     <Compile Update="forms\Entidade.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="forms\FormAccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="forms\Legislaturas.cs">
       <SubType>Form</SubType>
     </Compile>

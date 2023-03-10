@@ -1,9 +1,13 @@
-﻿using System;
+﻿using FontAwesome.Sharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace eg_painel.classes.system_settings
 {
@@ -38,10 +42,10 @@ namespace eg_painel.classes.system_settings
 
             // pripriedades para o cabeçalho
             dataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(48, 75, 109);
-            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font(Settings.GetFontMontserrat(), 10, FontStyle.Regular);
-            dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(251, 250, 246);
-            dataGridView.ColumnHeadersDefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(169, 169, 169);
+            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(247, 247, 247);
+            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font(Settings.GetFontMontserrat(), 10, FontStyle.Bold);
+            dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(0, 89, 83);
+            dataGridView.ColumnHeadersDefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(226, 226, 226);
             // ajusta altura da linha do cabeçalho
             dataGridView.ColumnHeadersHeight = 43;
 
@@ -49,8 +53,8 @@ namespace eg_painel.classes.system_settings
             dataGridView.RowHeadersDefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(112, 140, 237);
 
             // mudar de cor quando seleciona a linha / texto
-            dataGridView.RowsDefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(0, 150, 65);
-            dataGridView.RowsDefaultCellStyle.SelectionForeColor = System.Drawing.Color.FromArgb(255, 255, 254);
+            dataGridView.RowsDefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(222, 232, 248);
+            dataGridView.RowsDefaultCellStyle.SelectionForeColor = System.Drawing.Color.FromArgb(0, 88, 255);
 
             // Coloca a cor de fundo nas linhas
             dataGridView.RowsDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(255, 255, 254);
@@ -106,10 +110,79 @@ namespace eg_painel.classes.system_settings
             {
                 HeaderText = "",
                 ImageLayout = DataGridViewImageCellLayout.NotSet,
-                Image = Image.FromFile("seta_columns.png"),
+                Image = System.Drawing.Image.FromFile("seta_columns.png"),
                 Width = 45
             };
             dataGridView.Columns.Insert(0, columnPlay);
+        }
+
+        public static void SetSettingsForm(Form form)
+        {
+            form.Text = string.Empty;
+            form.ControlBox = false;
+            form.WindowState = FormWindowState.Normal;
+
+            form.BackColor = System.Drawing.Color.FromArgb(249, 245, 242);
+            form.Font = new Font(Settings.GetFontMontserrat() ?? FontFamily.GenericSansSerif, 10, FontStyle.Regular);
+
+            System.Drawing.Icon icon = new System.Drawing.Icon(@"imagens\logoEGP.ico");
+            form.Icon = icon;
+
+            form.MaximizeBox = false;
+            form.MinimizeBox = false;
+            form.ShowInTaskbar = true;
+
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.Text = "";
+            form.WindowState = FormWindowState.Normal;
+        }
+
+        public static void SetSettingsHeader(System.Windows.Forms.Panel panel,
+                                IconPictureBox iconPictureBox,
+                                IconChar iconChar,
+                                System.Windows.Forms.Label titleText,
+                                string caption)
+        {
+            panel.Dock = DockStyle.Top;
+            panel.Height = 69;
+            panel.BackColor = System.Drawing.Color.FromArgb(236, 233, 230);
+            panel.BorderStyle = BorderStyle.None;
+
+            iconPictureBox.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            iconPictureBox.BackColor = System.Drawing.Color.FromArgb(236, 233, 230);
+            iconPictureBox.IconChar = iconChar;
+            iconPictureBox.IconColor = System.Drawing.Color.Black;
+            iconPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            iconPictureBox.Size = new Size(34, 32);
+
+            panel.Controls.Add(iconPictureBox);
+
+            iconPictureBox.Location = new Point(31, (panel.Height / 2) - (iconPictureBox.Height / 2));
+
+            titleText.Text = caption;
+            titleText.Font = new Font(Settings.GetFontMontserrat() ?? FontFamily.GenericSansSerif, 13, FontStyle.Regular);
+            titleText.BackColor = System.Drawing.Color.Transparent;
+            titleText.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+
+            panel.Controls.Add(titleText);
+
+            titleText.Location = new Point(iconPictureBox.Location.X + iconPictureBox.Width + 3, (panel.Height / 2) - (titleText.Height / 2) - 2);                        
+        }
+
+        public static IconPictureBox GetIconPictureBoxBtnContolsForm(IconChar iconChar)
+        {            
+            IconPictureBox btn = new IconPictureBox()
+            {
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
+                BackColor = System.Drawing.Color.Transparent,
+                IconChar = iconChar,
+                IconColor = System.Drawing.Color.Black,
+                IconFont = IconFont.Auto,
+                Size = new Size(30, 30),
+                SizeMode = PictureBoxSizeMode.Zoom
+            };
+
+            return btn;
         }
     }
 }

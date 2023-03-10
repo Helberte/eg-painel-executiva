@@ -24,3 +24,4 @@ C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.forms.Entidade.res
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.forms.CadastroPessoas.resources
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.forms.Legislaturas.resources
 C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.Form_principal.resources
+C:\PROJETOS - C#\eg-painel\obj\Debug\net7.0-windows\eg_painel.forms.FormAccess.resources

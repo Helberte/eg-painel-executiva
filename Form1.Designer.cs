@@ -195,7 +195,6 @@
             this.MinimizeBox = false;
             this.Name = "Form_principal";
             this.Opacity = 0D;
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Form_principal_Load);
             this.Shown += new System.EventHandler(this.Form_principal_Shown);

@@ -16,7 +16,8 @@ namespace eg_painel.classes.system_settings
     {
         private FontFamily montserrat;
         static Settings? config;
-    
+        public static int positionButtonX = 0;
+        public static int accumulatePositionButton = 0;
 
         private Settings()
         {
@@ -183,6 +184,39 @@ namespace eg_painel.classes.system_settings
             };
 
             return btn;
+        }     
+
+        public static System.Windows.Forms.Button? GetButtonDefault(System.Windows.Forms.Control control, string text)
+        {
+            if (control is System.Windows.Forms.Form form)
+            {
+                System.Windows.Forms.Button button = new System.Windows.Forms.Button()
+                {
+                    Size = new Size(131, 39),
+                    Text = text,
+                    Font = new Font(Settings.GetFontMontserrat() ?? FontFamily.GenericSansSerif, 10, FontStyle.Bold),
+                    ForeColor = System.Drawing.Color.FromArgb(0, 120, 111),
+                    BackColor = System.Drawing.Color.Transparent,
+                    BackgroundImageLayout = ImageLayout.Stretch,
+                    FlatStyle = FlatStyle.Flat,
+                    BackgroundImage = System.Drawing.Image.FromFile("button_default.png")
+                };
+                button.FlatAppearance.BorderSize = 0;
+
+                form.Controls.Add(button);
+                button.Location = new Point(form.Width - button.Width - 20 - Settings.positionButtonX - Settings.accumulatePositionButton, form.Height - button.Height - (button.Height / 2) - 5);
+                button.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+                Settings.positionButtonX += button.Width;
+
+                if (Settings.accumulatePositionButton == 0)
+                    Settings.accumulatePositionButton = 8;
+                else
+                    Settings.accumulatePositionButton += Settings.accumulatePositionButton;
+
+                return button;
+            }
+            return null;
         }
     }
 }

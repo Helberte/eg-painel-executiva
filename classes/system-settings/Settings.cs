@@ -97,24 +97,24 @@ namespace eg_painel.classes.system_settings
             // não deixa o usuário deletar as linhas do grid
             dataGridView.AllowUserToDeleteRows = false;
 
-            SetHeightRowsDataGridView(dataGridView);
         }
-        private static void SetHeightRowsDataGridView(DataGridView dataGrid)
-        {
-            for (int i = 0; i < dataGrid.Rows.Count; i++)
-                dataGrid.Rows[i].Height = 35;
-        }
-
+       
         public static void AddColumnPlay(DataGridView dataGridView)
         {
-            DataGridViewImageColumn columnPlay = new DataGridViewImageColumn()
+            var col = dataGridView.Columns["play"];
+
+            if (col is null)
             {
-                HeaderText = "",
-                ImageLayout = DataGridViewImageCellLayout.NotSet,
-                Image = System.Drawing.Image.FromFile("seta_columns.png"),
-                Width = 45
-            };
-            dataGridView.Columns.Insert(0, columnPlay);
+                DataGridViewImageColumn columnPlay = new DataGridViewImageColumn()
+                {
+                    HeaderText = "",
+                    ImageLayout = DataGridViewImageCellLayout.NotSet,
+                    Image = System.Drawing.Image.FromFile("seta_columns.png"),
+                    Width = 45,
+                    Name = "play"
+                };
+                dataGridView.Columns.Insert(0, columnPlay);
+            }            
         }
 
         public static void SetSettingsForm(Form form)

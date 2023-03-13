@@ -166,5 +166,12 @@ namespace eg_painel.forms
             dataGridView.Columns["NÚMERO DE CADEIRAS"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView.Columns["QUORUM ABERTURA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (sender is DataGridView grid)            
+                grid.Rows[e.RowIndex].Height = 35;
+            
+        }
     }
 }

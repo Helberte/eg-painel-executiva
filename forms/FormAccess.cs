@@ -17,16 +17,12 @@ namespace eg_painel.forms
 {
     public partial class FormAccess : Form
     {
-        //ClassFormCheckAccesses? class_acessos;
-        //DataGridViewImageColumn? coluna_imagem_usuarios;
         DataGridViewImageColumn? coluna_imagem_acessos;
 
-        //bool mostrou_form_primeira_vez = false;
-        //string acessos = "";
-        //int linhas_alteradas = 0;
-
         int loadStyleGridAccess = 0;
+        ClassFormCheckAccesses? classAccess;
 
+      
         public FormAccess()
         {
             InitializeComponent();
@@ -48,33 +44,35 @@ namespace eg_painel.forms
        
         private async void FormAccess_Load(object sender, EventArgs e)
         {
+            classAccess = new ClassFormCheckAccesses();
             SettingsDefaultForm();
-            ClassFormCheckAccesses classAccess = new ClassFormCheckAccesses();
+            lbl_usuario.Visible = false;
+            lbl_nome_usuario.Visible = false;
 
             dataGrid_acessos.ColumnCount = 4;
 
-            dataGrid_acessos.Columns[0].Name = "id_acessos";
-            dataGrid_acessos.Columns[1].Name = "fk_menu_itens_suspensos";
-            dataGrid_acessos.Columns[2].Name = "fk_id_pessoa";
+            dataGrid_acessos.Columns.Insert(0, GetColumnPlay());
+            dataGrid_acessos.Columns[1].Name = "id_acessos";
+            dataGrid_acessos.Columns[2].Name = "fk_menu_itens_suspensos";
+            dataGrid_acessos.Columns[3].Name = "fk_id_pessoa";
 
-            dataGrid_acessos.Columns[0].Visible = false;
             dataGrid_acessos.Columns[1].Visible = false;
             dataGrid_acessos.Columns[2].Visible = false;
+            dataGrid_acessos.Columns[3].Visible = false;
 
-            dataGrid_acessos.Columns[3].Name = "ROTINA";
+            dataGrid_acessos.Columns[4].Name = "ROTINA";
             dataGrid_acessos.Columns.Add(new DataGridViewCheckBoxColumn() { Name = "ACESSO", Visible = true });
             dataGrid_acessos.Columns.Add(new DataGridViewCheckBoxColumn() { Name = "ALTERAR", Visible = true });
             dataGrid_acessos.Columns.Add(new DataGridViewCheckBoxColumn() { Name = "NOVO", Visible = true });
-            
-
-            // grid usuários
-
+           
+            // grid usuários           
             dataGrid_usuarios.ColumnCount = 4;
-            dataGrid_usuarios.Columns[0].Name = "ID";
-            dataGrid_usuarios.Columns[1].Name = "NOME";
-            dataGrid_usuarios.Columns[2].Name = "LOGIN";
-            dataGrid_usuarios.Columns[3].Name = "CPF";
-
+           
+            dataGrid_usuarios.Columns.Insert(0, GetColumnPlay());
+            dataGrid_usuarios.Columns[1].Name = "ID";
+            dataGrid_usuarios.Columns[2].Name = "NOME";
+            dataGrid_usuarios.Columns[3].Name = "LOGIN";
+            dataGrid_usuarios.Columns[4].Name = "CPF";
             List<string[]>? strings = new List<string[]>();
 
             strings = await classAccess.GetUsers();
@@ -83,24 +81,28 @@ namespace eg_painel.forms
             {
                 foreach (string[] item in strings)
                 {
-                    dataGrid_usuarios.Rows.Add(item);
+                    dataGrid_usuarios.Rows.Add(System.Drawing.Image.FromFile("seta_columns.png"), item[0], item[1], item[2], item[3]);
                 }
             }
 
-            Settings.AddColumnPlay(dataGrid_usuarios);
             Settings.StylesDataGridView(dataGrid_usuarios);
             Ajusta_largura_colunas_usuarios();
-
-            // grid acessos
-
-            PreencheGrid_acessos(classAccess);
-            Ajusta_largura_colunas_acessos();
+                        
             loadStyleGridAccess = 0;
         }
-        void Ajusta_largura_colunas_acessos()
+        private DataGridViewImageColumn GetColumnPlay()
         {
-            //int largura = (dataGrid_acessos.Width - 45) / 4;
-
+            DataGridViewImageColumn columnPlay = new DataGridViewImageColumn()
+            {
+                HeaderText = "",
+                ImageLayout = DataGridViewImageCellLayout.NotSet,
+                Width = 45,
+                Name = "play"
+            };
+            return columnPlay;
+        }
+        void Ajusta_largura_colunas_acessos()
+        {            
             dataGrid_acessos.Columns["ROTINA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGrid_acessos.Columns["ACESSO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGrid_acessos.Columns["ALTERAR"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -160,26 +162,15 @@ namespace eg_painel.forms
 
                     // coluna 0 = "id_acessos";
                     // coluna 1 = "fk_menu_itens_suspensos";
-                    // coluna 2 = "fk_id_pessoa";
-
-                    if (existe_a_coluna)
-                        dataGrid_acessos.Rows.Add(System.Drawing.Image.FromFile("seta_colunas_grid_3.jpg"),
-                                                                    id_acessos,
-                                                                    id_menu_itens_suspensos,
-                                                                    id_usuario,
-                                                                    itens[4],
-                                                                    acesso,
-                                                                    alterar,
-                                                                    novo);
-                    else
-                        dataGrid_acessos.Rows.Add(id_acessos, id_menu_itens_suspensos, id_usuario, itens[4], acesso, alterar, novo);
+                    // coluna 2 = "fk_id_pessoa";                                                           
+                    
+                    dataGrid_acessos.Rows.Add(System.Drawing.Image.FromFile("seta_columns.png"), id_acessos, id_menu_itens_suspensos, id_usuario, itens[4], acesso, alterar, novo);
                 }
-                Settings.AddColumnPlay(dataGrid_acessos);
             }
         }
         void Ajusta_largura_colunas_usuarios()
         {
-            // largura das colunas
+            dataGrid_usuarios.Columns["play"].Width = 45;
             dataGrid_usuarios.Columns["ID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGrid_usuarios.Columns["NOME"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGrid_usuarios.Columns["LOGIN"].Width = 250;
@@ -229,14 +220,45 @@ namespace eg_painel.forms
             }
         }
 
-        private void BtnSave_Click(object? sender, EventArgs e)
+        private async void BtnSave_Click(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            string acessos = "";
+            int linhas_alteradas = 0;
+
+            for (int i = 0; i < dataGrid_acessos.Rows.Count; i++)
+            {
+                int id_acessos = Convert.ToInt32(dataGrid_acessos["id_acessos", i].Value);
+                int fk_menu_itens_suspensos = Convert.ToInt32(dataGrid_acessos["fk_menu_itens_suspensos", i].Value);
+                int fk_id_pessoa = Convert.ToInt32(dataGrid_acessos["fk_id_pessoa", i].Value);
+                int acesso = Convert.ToBoolean(dataGrid_acessos["Acesso", i].Value) ? 1 : 0;
+                int alterar = Convert.ToBoolean(dataGrid_acessos["Alterar", i].Value) ? 1 : 0;
+                int novo = Convert.ToBoolean(dataGrid_acessos["Novo", i].Value) ? 1 : 0;
+
+                acessos += "id_acessos=" + id_acessos +
+                           ";fk_menu_itens_suspensos=" + fk_menu_itens_suspensos +
+                           ";id_usuario=" + fk_id_pessoa +
+                           ";acesso=" + acesso +
+                           ";alterar=" + alterar +
+                           ";novo=" + novo + ";|";
+
+                linhas_alteradas++;
+                // Modelo da string
+                // id_acessos=12;fk_menu_itens_suspensos=0;id_usuario=1;acesso=1;alterar=1;novo=1;\n
+            }
+
+            bool? ret = false;
+            if (classAccess is not null)            
+                ret = await classAccess.UpdateAccessUser(acessos, linhas_alteradas);                       
+
+            if (ret == true)
+               tabControl.SelectedTab = tabPage_usuarios;           
         }
 
         private void BtnEdit_Click(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            dataGrid_acessos.ReadOnly = false;
+            dataGrid_acessos.Columns["ROTINA"].ReadOnly = true;
+            dataGrid_acessos.RowsDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(255, 255, 254);
         }
 
         private void BtnNew_MouseLeave(object? sender, EventArgs e)
@@ -284,15 +306,41 @@ namespace eg_painel.forms
         {
             if (tabControl.SelectedIndex == 1)
             {
-                if (loadStyleGridAccess == 0)
+                if (dataGrid_usuarios.CurrentRow is not null)
                 {
-                    Settings.StylesDataGridView(dataGrid_acessos);
-                    dataGrid_acessos.ReadOnly = false;
-                    dataGrid_acessos.Columns["ROTINA"].ReadOnly = true;
-                    loadStyleGridAccess = 1;
+                    // grid acessos
+                    if (classAccess is not null)
+                    {
+                        dataGrid_acessos.Rows.Clear();
+                        PreencheGrid_acessos(classAccess);
+                        Ajusta_largura_colunas_acessos();
+                    }
+
+                    lbl_usuario.Visible = true;
+                    lbl_nome_usuario.Visible = true;
+                    lbl_nome_usuario.Text = dataGrid_usuarios.CurrentRow.Cells["nome"].Value.ToString();
                 }
-                
+
+                if (loadStyleGridAccess == 0) // para que os styles sejam definidos apenas uma vez
+                {
+                    Settings.StylesDataGridView(dataGrid_acessos);                   
+                    loadStyleGridAccess = 1;
+                    dataGrid_acessos.RowsDefaultCellStyle.BackColor = System.Drawing.Color.Red;
+
+                }
+            }
+            else if (tabControl.SelectedIndex == 0)
+            {
+                lbl_usuario.Visible = false;
+                lbl_nome_usuario.Visible = false;
             }
         }
+
+        private void dataGrid_acessos_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (sender is DataGridView grid)            
+                grid.Rows[e.RowIndex].Height = 35; 
+        }
+       
     }
 }

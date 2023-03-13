@@ -132,6 +132,7 @@
             this.dataGrid_usuarios.RowTemplate.Height = 25;
             this.dataGrid_usuarios.Size = new System.Drawing.Size(900, 377);
             this.dataGrid_usuarios.TabIndex = 0;
+            this.dataGrid_usuarios.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGrid_acessos_RowsAdded);
             // 
             // tabPage_acessos
             // 
@@ -153,6 +154,7 @@
             this.dataGrid_acessos.RowTemplate.Height = 25;
             this.dataGrid_acessos.Size = new System.Drawing.Size(900, 377);
             this.dataGrid_acessos.TabIndex = 0;
+            this.dataGrid_acessos.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGrid_acessos_RowsAdded);
             // 
             // lbl_usuario
             // 

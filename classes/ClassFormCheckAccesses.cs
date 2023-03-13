@@ -1,6 +1,9 @@
 ﻿using eg_painel.classes.connection_bd;
 using eg_painel.form_login;
+using Npgsql;
+using NpgsqlTypes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -85,8 +88,7 @@ namespace eg_painel.classes
 
                         await using var command = Connection.dataSource.CreateCommand(query_selector);
                         await using var reader = await command.ExecuteReaderAsync();
-                        
-                        
+                                                
                         while (await reader.ReadAsync())
                         {
                             acessos_usuario += reader["id_usuarios"].ToString() + "_" +
@@ -109,5 +111,69 @@ namespace eg_painel.classes
             }
             return null;
         }
+
+        public async Task<bool?> UpdateAccessUser(string queryText, int iterations)
+        {
+            try
+            {
+                if (Connection.SetDataSource())
+                {
+                    if (Connection.dataSource is not null)
+                    {                       
+                        await using var conn = await Connection.dataSource.OpenConnectionAsync();
+                        await using var cmd = new NpgsqlCommand("CALL updateaccessusers( '" + queryText + "', " + iterations + ")", conn);
+                                               
+                        await cmd.ExecuteNonQueryAsync();
+
+                        return true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Ocorreu um erro ao gravar as permissões do usuário. " + e.Message.ToString(), "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return false;
+        }
+
+
+
+        //public async Task<string?> UpdateAccessUser()
+        //{           
+        //    try
+        //    {
+        //        if (Connection.SetDataSource())
+        //        {
+        //            if (Connection.dataSource is not null)
+        //            {
+        //                string query = "update acessos set acesso = @ac, alterar = @al, novo = @no " +
+        //                                " where fk_menu_itens_suspensos = @me and fk_usuarios = 2 ";
+
+        //                await using var conn = await Connection.dataSource.OpenConnectionAsync();
+
+        //                await using var cmd = new NpgsqlCommand(query, conn)
+        //                {
+        //                    Parameters=
+        //                    {
+        //                        new("ac",'1'),
+        //                        new("al",'1'),
+        //                        new("no",'1'),
+        //                        new("me", 2)
+        //                    }      
+        //                };
+        //                await cmd.ExecuteNonQueryAsync();
+        //            }                    
+        //        }               
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+
+        //    return null;
+        //}
     }
 }

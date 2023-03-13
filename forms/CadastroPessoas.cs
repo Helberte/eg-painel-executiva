@@ -178,6 +178,13 @@ namespace eg_painel.forms
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
-        }       
+        }
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (sender is DataGridView grid)            
+                grid.Rows[e.RowIndex].Height = 35;
+            
+        }
     }
 }
